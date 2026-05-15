@@ -56,6 +56,7 @@ func main() {
 	)
 
 	global.LOG.Infof("1Panel server is starting on %s", serverAddr)
+	fmt.Printf("1Panel server is starting on http://%s\n", serverAddr)
 
 	if err := engine.Run(serverAddr); err != nil {
 		global.LOG.Errorf("Failed to start server: %v", err)
