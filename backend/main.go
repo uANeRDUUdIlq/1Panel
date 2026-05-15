@@ -59,6 +59,8 @@ func main() {
 
 	if err := engine.Run(serverAddr); err != nil {
 		global.LOG.Errorf("Failed to start server: %v", err)
+		// Print to stderr as well so the error is visible even if the logger fails
+		fmt.Fprintf(os.Stderr, "Fatal: failed to start server: %v\n", err)
 		os.Exit(1)
 	}
 }
