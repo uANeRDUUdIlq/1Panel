@@ -34,11 +34,11 @@ type Config struct {
 	LogLevel string `mapstructure:"log_level"`
 
 	// Panel settings
-	BaseDir     string `mapstructure:"base_dir"`
-	DataDir     string `mapstructure:"data_dir"`
-	TmpDir      string `mapstructure:"tmp_dir"`
-	BackupDir   string `mapstructure:"backup_dir"`
-	RunDir      string `mapstructure:"run_dir"`
+	BaseDir      string `mapstructure:"base_dir"`
+	DataDir      string `mapstructure:"data_dir"`
+	TmpDir       string `mapstructure:"tmp_dir"`
+	BackupDir    string `mapstructure:"backup_dir"`
+	RunDir       string `mapstructure:"run_dir"`
 	DockerSocket string `mapstructure:"docker_socket"`
 }
 
@@ -50,8 +50,9 @@ func New(cfg *Config) *Application {
 	if cfg.AppPort == 0 {
 		cfg.AppPort = 9999
 	}
+	// Default to 12 hours instead of 24 for slightly tighter session security
 	if cfg.JWTExpiration == 0 {
-		cfg.JWTExpiration = 24 * time.Hour
+		cfg.JWTExpiration = 12 * time.Hour
 	}
 	if cfg.BaseDir == "" {
 		cfg.BaseDir = "/opt/1panel"
@@ -74,7 +75,7 @@ func DefaultConfig() *Config {
 		AppPort:      9999,
 		AppVersion:   "v1.0.0",
 		DBPath:       "/opt/1panel/db/1panel.db",
-		JWTExpiration: 24 * time.Hour,
+		JWTExpiration: 12 * time.Hour,
 		LogPath:      "/opt/1panel/log",
 		LogLevel:     "info",
 		BaseDir:      "/opt/1panel",
